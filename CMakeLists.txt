@@ -36,6 +36,6 @@ add_custom_target(packageBin
 set(CPACK_DEBIAN_PACKAGE_MAINTAINER "Your name")
 set(CPACK_DEBIAN_PACKAGE_DEPENDS "libc6 (>=2.28), zlib1g")
 set(CPACK_DEB_COMPONENT_INSTALL ON)
-set(CPACK_COMPONENTS_ALL bin sources)
+set(CPACK_COMPONENTS_ALL bin)
 set(CPACK_ARCHIVE_COMPONENT_INSTALL ON)
 include(CPack)
