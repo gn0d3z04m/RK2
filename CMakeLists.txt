@@ -19,3 +19,23 @@ if(BUILD_TESTS)
     enable_testing()
     add_test(NAME test_s COMMAND test_s)
 endif()
+
+install(TARGETS main
+    RUNTIME DESTINATION bin
+    CONFIGURATIONS Release
+    DESTINATION bin
+    COMPONENT bin
+)
+
+add_custom_target(packageBin
+  COMMAND cpack 
+    -D CPACK_GENERATOR="DEB"
+    -D CPACK_COMPONENTS_ALL=bin
+)
+
+set(CPACK_DEBIAN_PACKAGE_MAINTAINER "Your name")
+set(CPACK_DEBIAN_PACKAGE_DEPENDS "libc6 (>=2.28), zlib1g")
+set(CPACK_DEB_COMPONENT_INSTALL ON)
+set(CPACK_COMPONENTS_ALL bin sources)
+set(CPACK_ARCHIVE_COMPONENT_INSTALL ON)
+include(CPack)
