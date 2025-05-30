@@ -2,9 +2,11 @@ name: CI
 
 on:
   push:
-    branches: [main]
-  pull_request:
-    branches: [main]
+    tags:
+      - 'v*.*.*'
+
+permissions:
+  contents: write
 
 jobs:
   build-and-test:
@@ -22,14 +24,21 @@ jobs:
       - name: Configure CMake
         run: |
           cmake -H. -Bbuild -DBUILD_TESTS=ON DCMAKE_CXX_FLAGS='--coverage'
-      - name: Build project
-        run: |
-          cmake --build build --target=packageBin
       - name: Run tests
         run: |
           build/test_s
+      - name: Build project
+        run: |
+          cmake --build build --target=packageBin
       - name: ls
         run: |
           ls
           echo " "
           ls build
+      - name: Upload assets to GitHub release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            build/*.deb
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
