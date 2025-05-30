@@ -4,5 +4,5 @@
 TEST(Singleton, SimpleTest) {
 	auto& a = Singleton::Instance();
 	auto& b = Singleton::Instance();
-	EXPECT_THROW(b = a, std::logic_error);
+	EXPECT_EQ(&a, &b);
 }
