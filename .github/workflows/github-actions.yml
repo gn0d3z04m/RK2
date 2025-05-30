@@ -28,12 +28,8 @@ jobs:
       - name: Run tests
         run: |
           build/test_s
-      - name: Generate coverage report
+      - name: ls
         run: |
-          cd build
-          lcov -c -d CMakeFiles/test_s.dir --ignore-errors mismatch --include *.cpp --output-file coverage.info
-      - name: Coveralls GitHub Action
-        uses: coverallsapp/github-action@v2
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          path-to-lcov: build/coverage.info
+          ls
+          echo " "
+          ls build
