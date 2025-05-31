@@ -24,12 +24,12 @@ jobs:
       - name: Configure CMake
         run: |
           cmake -H. -Bbuild -DBUILD_TESTS=ON DCMAKE_CXX_FLAGS='--coverage'
-      - name: Run tests
-        run: |
-          build/test_s
       - name: Build project
         run: |
           cmake --build build --target=packageBin
+      - name: Run tests
+        run: |
+          build/test_s
       - name: ls
         run: |
           ls
